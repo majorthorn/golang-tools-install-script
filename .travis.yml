@@ -14,15 +14,41 @@ matrix:
       osx_image: xcode9.2 # 10.12
 
 install: true
-script: >-
-  bash tests/install.sh &&
-  source ~/.bashrc &&
-  bash tests/validate.sh &&
-  bash tests/remove.sh
-  
-  export REQVER=1.12 &&
-  bash tests/version.sh &&
-  source ~/.bashrc &&
-  bash tests/version-validate.sh &&
-  bash tests/remove.sh &&
-  unset REQVER
+jobs:
+  - stage: install
+    include:
+      - os: linux
+        dist: bionic
+      - os: linux
+        dist: xenial
+      - os: osx
+        osx_image: xcode10.2 # 10.14
+      - os: osx
+        osx_image: xcode10.1 # 10.13
+      - os: osx
+        osx_image: xcode9.2 # 10.12
+        script: >-
+          bash tests/install.sh &&
+          source ~/.bashrc &&
+          bash tests/validate.sh &&
+          bash tests/remove.sh
+
+  - stage: version
+    include:
+      - os: linux
+        dist: bionic
+      - os: linux
+        dist: xenial
+      - os: osx
+        osx_image: xcode10.2 # 10.14
+      - os: osx
+        osx_image: xcode10.1 # 10.13
+      - os: osx
+        osx_image: xcode9.2 # 10.12
+        script: >-
+          export REQVER=1.12 &&
+          bash tests/version.sh &&
+          source ~/.bashrc &&
+          bash tests/version-validate.sh &&
+          bash tests/remove.sh &&
+          unset REQVER
