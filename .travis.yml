@@ -15,6 +15,7 @@ language: bash
 
 install: true
 jobs:
+  include:
   - stage: install
     include:
       - os: linux
