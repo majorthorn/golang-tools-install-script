@@ -1,7 +1,12 @@
 language: bash
 
-matrix:
+
+jobs: 
   include:
+
+  - stage: install
+  matrix:
+    include:
     - os: linux
       dist: bionic
     - os: linux
@@ -13,18 +18,28 @@ matrix:
     - os: osx
       osx_image: xcode9.2 # 10.12
 
-install: true
-jobs: 
-  include:
+      install: true
+      script: >-
+        bash tests/install.sh &&
+        source ~/.bashrc &&
+        bash tests/validate.sh &&
+        bash tests/remove.sh
 
-  - stage: install
-    script: >-
-      bash tests/install.sh &&
-      source ~/.bashrc &&
-      bash tests/validate.sh &&
-      bash tests/remove.sh
+    - stage: version
+      matrix:
+        include:
+        - os: linux
+          dist: bionic
+        - os: linux
+          dist: xenial
+        - os: osx
+          osx_image: xcode10.2 # 10.14
+        - os: osx
+          osx_image: xcode10.1 # 10.13
+        - os: osx
+          osx_image: xcode9.2 # 10.12
 
-  - stage: version
+      install: true
     script: >-
       export REQVER=1.12 &&
       bash tests/version.sh &&
