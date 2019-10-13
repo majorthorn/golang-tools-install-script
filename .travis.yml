@@ -22,5 +22,5 @@ script: >-
   
   bash tests/version.sh &&
   source ~/.bashrc &&
-  bash tests/validate.sh &&
+  bash tests/version-validate.sh &&
   bash tests/remove.sh
