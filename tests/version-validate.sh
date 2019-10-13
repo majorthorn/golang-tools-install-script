@@ -26,10 +26,10 @@ echo "Run hello test project"
 hello
 popd
 
-REQVER="1.12"
 GOVER=`go version`
 
-echo "$GOVER"
+echo "Testing to make sure that Go $REQVER is installed\n"
+
 if grep -q "$REQVER" <<< "$GOVER"; then
 	echo "Version contains: $REQVER"
 	exit 0

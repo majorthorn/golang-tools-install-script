@@ -20,7 +20,9 @@ script: >-
   bash tests/validate.sh &&
   bash tests/remove.sh
   
+  export REQVER=1.12 &&
   bash tests/version.sh &&
   source ~/.bashrc &&
   bash tests/version-validate.sh &&
-  bash tests/remove.sh
+  bash tests/remove.sh &&
+  unset REQVER
