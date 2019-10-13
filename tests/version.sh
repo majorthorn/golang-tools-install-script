@@ -3,4 +3,4 @@ set -e
 
 unset GOROOT
 unset GOPATH
-"../goinstall.sh --version 1.12"
+"$(dirname "$0")/../goinstall.sh" --version 1.12 
