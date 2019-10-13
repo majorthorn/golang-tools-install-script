@@ -26,13 +26,14 @@ echo "Run hello test project"
 hello
 popd
 
+REQVER="1.12"
 GOVER=`go version`
 
 echo "$GOVER"
-if grep -q "1.12" <<< "$GOVER"; then
-	echo "Version contains 1.12"
+if grep -q "$REQVER" <<< "$GOVER"; then
+	echo "Version contains: $REQVER"
 	exit 0
 else
-	echo "Does not contain 1.12"
+	echo "Does not contain: $REQVER"
 	exit 1
 fi
